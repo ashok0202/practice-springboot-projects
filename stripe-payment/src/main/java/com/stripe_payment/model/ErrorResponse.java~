@@ -1,0 +1,4 @@
+package com.stripe_payment.model;
+
+public class ErrorResponse {
+}
