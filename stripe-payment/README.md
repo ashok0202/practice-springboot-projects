@@ -1,4 +1,4 @@
-    # Stripe Payment Integration (Spring Boot)
+ # Stripe Payment Integration (Spring Boot)
 
 This project integrates Stripe payment processing with a Spring Boot application.
 
@@ -28,7 +28,8 @@ Send a **POST** request with the following JSON:
     "currency": "INR",
     "name": "Mobile"
 }
-## Success Response
+
+ Success Response
 {
     "status": "SUCCESS",
     "message": "Payment Session created",
