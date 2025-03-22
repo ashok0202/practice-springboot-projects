@@ -16,7 +16,7 @@ public class OrderProcessingService {
 
     public Order placeOrder(Order order) {
         Product product = inventoryService.getProduct(order.getProductId());
-        order.setTotalPrice(product.getP() * order.getQuantity());
+        order.setTotalPrice(product.getPrice() * order.getQuantity());
         return orderService.createOrder(order);
     }
 }
