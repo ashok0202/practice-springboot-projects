@@ -1,0 +1,14 @@
+spring:
+   application:
+       name: spring-transaction
+
+   datasource:
+     driver-class-name: com.mysql.cj.jdbc.Driver  # Changed to MySQL (replace as needed)
+     url: jdbc:mysql://${DB_HOST:localhost}:3306/${DB_NAME:transaction}?createDbIfNotExist=true  # Generic SQL URL
+     username: ${DB_USER:root}
+     password: ${DB_PASS:root}
+
+   jpa:
+     show-sql: true
+     hibernate:
+       ddl-auto: update
