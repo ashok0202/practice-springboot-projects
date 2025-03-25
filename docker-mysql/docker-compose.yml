@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+    mysql:
+        container_name: mysql-container
+        image: mysql:8.0
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: rootpassword
+            MYSQL_DATABASE: mydatabase
+            MYSQL_USER: myuser
+            MYSQL_PASSWORD: mypassword
+        ports:
+            - "3307:3306"
+        networks:
+            - mynetwork
+        volumes:
+            - mysql-data:/var/lib/mysql
+
+    springboot-app:
+        image: docker-mysqlimage
+        container_name: springboot-container
+        build: .
+        restart: always
+        ports:
+            - "8080:8080"
+        depends_on:
+            - mysql
+        environment:
+            MYSQL_HOST: mysql
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+        networks:
+            - mynetwork
+
+networks:
+    mynetwork:
+        driver: bridge
+
+volumes:
+    mysql-data:
