@@ -1,0 +1,23 @@
+spring:
+  application:
+   name: amazonS3
+
+
+cloud:
+  aws:
+    credentials:
+      access-key: <AccessKey>
+      secret-key: <SecretKey>
+
+    region:
+      static:
+        name: us-east-1
+application:
+  bucket:
+    name: my-app-storage-123
+#  servlet:
+#    multipart:
+#      enabled: true
+#      file-size-threshold: 2MB
+#      max-file-size: 10MB
+#      max-request-size: 10MB
