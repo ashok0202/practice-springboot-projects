@@ -1,0 +1,19 @@
+spring:
+  application:
+  name: cloudinaryDemo
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+cloud:
+  aws:
+    credentials:
+      access-key: AKIAVJEGCUUXV555X4O3
+      secret-key: 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
+
+    region:
+      static:
+        name: us-east-1
+application:
+  bucket:
+    name: my-app-storage-123

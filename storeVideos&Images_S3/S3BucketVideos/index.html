@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload & Play Video</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f7;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    input[type="file"] {
+      padding: 10px;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    video {
+      margin-top: 30px;
+      width: 80%;
+      max-width: 720px;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    #status {
+      margin-top: 10px;
+      font-size: 16px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Upload  &  Play Video</h2>
+
+  <input type="file" id="videoInput" accept="video/mp4" />
+  <br>
+  <button onclick="uploadVideo()">Upload & Play</button>
+
+  <div id="status"></div>
+
+  <video id="videoPlayer" controls></video>
+
+  <script>
+    async function uploadVideo() {
+      const fileInput = document.getElementById('videoInput');
+      const videoPlayer = document.getElementById('videoPlayer');
+      const statusDiv = document.getElementById('status');
+
+      if (fileInput.files.length === 0) {
+        alert("Please choose a video file first.");
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+
+      statusDiv.textContent = "Uploading...";
+
+      try {
+        const response = await fetch("http://localhost:8080/s3/upload", {
+          method: "POST",
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error("Upload failed.");
+        }
+
+        const result = await response.json();
+        const videoUrl = result.secureUrl;
+
+        statusDiv.textContent = "Upload successful!";
+        videoPlayer.src = videoUrl;
+        videoPlayer.load();
+        videoPlayer.play();
+      } catch (error) {
+        statusDiv.textContent = "Error: " + error.message;
+        console.error("Upload error:", error);
+      }
+    }
+  </script>
+
+</body>
+</html>
