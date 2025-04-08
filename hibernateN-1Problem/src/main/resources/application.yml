@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: hibernateN-1Problem
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/libray
+    username: postgres
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    dialect: org.hibernate.dialect.PostgreSQLDialect
