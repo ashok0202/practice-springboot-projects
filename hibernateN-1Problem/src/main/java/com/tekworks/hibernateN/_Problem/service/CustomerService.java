@@ -32,9 +32,12 @@ public class CustomerService {
                         new RuntimeException("Exception occurred while fetching customer : " + id));
     }
 
+    //Query Fetching
 //    public List<Customer> getAllCustomers() {
 //        return customerRepository.fetchCustomersWithAddress();
 //    }
+
+    // Entitygraph
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
